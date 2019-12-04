@@ -1,3 +1,4 @@
+
 #include "ft_printf.h"
 #include <limits.h>
 
@@ -66,15 +67,15 @@ int	main(void)
 	ft_printf("\033[0m");
 
 	ft_printf("\033[0;33m");
-	ft_printf("Integers: -Flag, 0Flag, .Flag, *Flag:\n");
-	ft_printf("<- %i \n", ft_printf("%-3i$ %7i$ %.8i$ %5.*i", i1, i2, i3, 8, i4));
-	printf("<- %i \n\n", printf("%-3i$ %7i$ %.8i$ %5.*i", i1, i2, i3, 8, i4));
+	ft_printf("Integers: .6(-3) +.7(-446) 07(-54) +5(432)\n");
+	ft_printf("<- %i \n", ft_printf("%.6i, |%+.7i, |%07i, |%+5i", -3, -446, -54, 432));
+	printf("<- %i \n\n", printf("%.6i, |%.7i, |%07i, |%+5i", -3, -446, -54, 432));
 	ft_printf("\033[0m");
 
 	ft_printf("\033[1;33m");
-	ft_printf("Integers: -0Flag, +2Flag, -8.7Flag, #Flag:\n");
-	ft_printf("<- %i \n", ft_printf("%-0i$ %+2i$ %-8.7i$ %#i$", i1, i3, i3, i4));
-	printf("<- %i \n\n", printf("%-0i$ %+2i$ %-8.7i$ %#i$", i1, i3, i3, i4));
+	printf("Integers: +08.6, +8.6, +07,       +7,     + 7,     +.7,      +0.7:\n");
+	ft_printf("<- %i \n", ft_printf("%+08.6d , |%+8.6d, |%+07d, |%+7d, |%+ 7d, |%+.7d, |%+0.7d", 32, 32, 32, 32, -32, -32, -32));
+	printf("<- %i \n\n", printf("%+08.6d , |%+8.6d, |%+07d, |%+7d, |%+ 7d, |%+.7d, |%+0.7d", 32, 32, 32, 32, -32, -32, -32));
 	ft_printf("\033[0m");
 
 	ft_printf("\033[0;34m");
@@ -146,7 +147,7 @@ int	main(void)
 	printf("<- %i \n\n\n", printf("%6.8s, %8.6s, %.5s, %.23s$", s1, s2, s3, s4));
 	ft_printf("\033[0m");
 
-	ft_printf("\033[;35m");
+	ft_printf("\033[0;35m");
 	ft_printf("Advanced Flags Management:\n");
 	ft_printf("<- %i \n", ft_printf("%*s, %*s, %*s, %*s$", -1, s1, 0, s2, 9, s3, 7, s4));
 	printf("<- %i \n\n", printf("%*s, %*s, %*s, %*s$", -1, s1, 0, s2, 9, s3, 7, s4));
@@ -184,12 +185,56 @@ int	main(void)
 
 
 	ft_printf("\033[0;33m");
-	ft_printf(" ' flags and \\  :\n\n");
+	ft_printf(" ' flags and \\  :\n");
+	printf(" \%% \n");
+	ft_printf(" \%% \n");
+	ft_printf("hello \n world\n\n");
 
 	ft_printf("\033[1;33m");
 	ft_printf("Edge case checks: negative precision, negative width w/e \n");
 	ft_printf("<- %i \n", ft_printf("%*i, %.*i, %*.*i$", -5, i1, -6, i2, -3, -5, i3));
 	printf("<- %i \n", printf("%*i, %.*i, %*.*i$", -5, i1, -6, i2, -3, -5, i3));
+
+	ft_printf("\033[0;34m");
+	ft_printf("Ints: 3.7i, 3.7i, 3.3i, -3.7i \n");
+	ft_printf("<- %i \n", ft_printf("%3.7i, %3.7i, %3.3i, %-03.7i", 3267, -2375, -8462, 3267));
+	printf("<- %i \n\n", printf("%3.7i, %3.7i, %3.3i, %-03.7i", 3267, -2375, -8462, 3267));
+
+	ft_printf("\033[1;34m");
+	ft_printf("Ints: 08.5i, 010.5i, 08.5i, 08.3i \n");
+	ft_printf("<- %i \n", ft_printf("%08.5i, %010.5i, %08.5i, %08.3i", 34, -216, 0, 8375));
+	printf("<- %i \n\n", printf("%08.5i, %010.5i, %08.5i, %08.3i", 34, -216, 0, 8375));
+
+	ft_printf("\033[0;35m");
+	ft_printf("Shorts and Longs: hhi, hi, li, lli, hhi\n");
+	ft_printf("<- %i \n", ft_printf("%hhi, %hi, %li, %lli, %hhi", (char)-45, (short)-385, (long)-32, (long long)-43, (char)-87));
+	printf("<- %i \n\n", printf("%hhi, %hi, %li, %lli, %hhi", (char)-45, (short)-385, (long)-32, (long long)-43, (char)-87));
+
+	ft_printf("\033[1;35m");
+	ft_printf("Ints: | i, |4 i, |+ i, |05 i \n");
+	ft_printf("<- %i \n", ft_printf("this % i number, % i, % d, % +i, % 5i", -267, -1, -267, -7, -2562));
+	printf("<- %i \n\n", printf("this % i number, % i, % d, % +i, % 5i", -267, -1, -267, -7, -2562));
+
+	ft_printf("\033[0;36m");
+	ft_printf("Int 0: +.0i, +.i, +-5.0i, +-5.i \n");
+	ft_printf("<- %i \n", ft_printf("%+.0i, %+.i, %+-5.0i, %+1.i", 0, 0, 0, 0));
+	printf("<- %i \n\n", printf("%+.0i, %+.i, %+-5.0i, %+1.i", 0, 0, 0, 0));
+
+	ft_printf("\033[1;36m");
+	ft_printf("Octal: #.5o, #8.5o, #2.7o, #-8.5o, $-2.7o\n");
+	ft_printf("<- %i \n", ft_printf("%#.5o, %#8.5o, %#2.7o, %-#8.5o, %#-2.7o", 21, 34, 3267, 34, 3267));
+	printf("<- %i \n\n", printf("%#.5o, %#8.5o, %#2.7o, %-#8.5o, %#-2.7o", 21, 34, 3267, 34, 3267));
+
+	ft_printf("\033[0;31m");
+	ft_printf("Hexa: #.0x, #.x, #5.0x, #5.x, #-5.0x, #-5.x \n");
+	ft_printf("<- %i \n", ft_printf("%#.0x, %#.x, %#5.0x, %-5.0x, %#-5.x", 0, 0, 0, 0, 0));
+	printf("<- %i \n\n", printf("%#.0x, %#.x, %#5.0x, %-5.0x, %#-5.x", 0, 0, 0, 0, 0));
+
+	ft_printf("\033[0;31m");
+	ft_printf("Null pointers :\n");
+	ft_printf("<- %i \n", ft_printf("%p, %9.2p, %2.9p, %.5p", LONG_MAX + 1, 1234, 1234, 0));
+	printf("<- %i \n\n", printf("%p, %9.2p, %2.9p, %.5p", LONG_MAX + 1, 1234, 1234, 0));
+
 
 	ft_printf("\033[1;31m");
 	ft_printf("R ");
