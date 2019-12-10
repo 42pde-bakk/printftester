@@ -1,6 +1,7 @@
-
 #include "ft_printf.h"
 #include <limits.h>
+#include <locale.h>
+#include <math.h>
 
 int	main(void)
 {
@@ -41,6 +42,17 @@ int	main(void)
 	char		*nstr1;
 	int			H = 7;
 	char		*str;
+
+	float		f1 = 32.65;
+	float		f2 = 413.658712312;
+	float		f3 = 8727.2123123;
+	float		f4 = 3123592.651123123;
+	float		f5 = 4112312573.6587;
+	float		f6 = 81201456457457727.32;
+
+	double		d1 = 392.65;
+	double		d2 = 413.6587;
+	double		d3 = 81201727.2;
 
 	ft_printf("\033[0;31m");
 	ft_printf("Strings: -Flag, 0Flag, .Flag, *Flag:\n");
@@ -98,8 +110,8 @@ int	main(void)
 
 	ft_printf("\033[1;35m");
 	ft_printf("hexadecimals: -0Flag, +0Flag, -8.7Flag, #Flag:\n");
-	ft_printf("<- %i \n", ft_printf("%-0x$ %+0x$ %-8.7x$ %x$", x1, x2, x3, x4));
-	printf("<- %i \n\n", printf("%-0x$ %+0x$ %-8.7x$ %x$", x1, x2, x3, x4));
+	ft_printf("<- %i \n", ft_printf("%-0x$ %+0x$ %-8.7x$ %x$", x1, x2, ULONG_MAX, x4));
+	printf("<- %i \n\n", printf("%-0x$ %+0x$ %-8.7x$ %x$", x1, x2, ULONG_MAX, x4));
 	ft_printf("\033[0m");
 
 	ft_printf("\033[0;36m");
@@ -110,14 +122,14 @@ int	main(void)
 
 	ft_printf("\033[1;36m");
 	ft_printf("HEXADECIMALS: -0Flag, +0Flag, -8.7Flag, #Flag:\n");
-	ft_printf("<- %i \n", ft_printf("%-0X$ %+0X$ %-8.7X$ %#X$", X1, X2, X3, X4));
-	printf("<- %i \n\n", printf("%-0X$ %+0X$ %-8.7X$ %#X$", X1, X2, X3, X4));
+	ft_printf("<- %i \n", ft_printf("%-0X$ %+0X$ %-8.7X$ %#X$", ULONG_MAX, X2, X3, X4));
+	printf("<- %i \n\n", printf("%-0X$ %+0X$ %-8.7X$ %#X$", ULONG_MAX, X2, X3, X4));
 	ft_printf("\033[0m");
 
 	ft_printf("\033[0;31m");
-	ft_printf("Pointer addresses (discards all flags) :\n");
-	ft_printf("<- %i \n", ft_printf("%-8p$ %07p$ %.8p$ %.*p$", &s1, &s2, &s3, H, &s4));
-	printf("<- %i \n\n", printf("%-8p$ %07p$ %.8p$ %.*p$", &s1, &s2, &s3, H, &s4));
+	ft_printf("Pointer addresses:\n");
+	ft_printf("<- %i \n", ft_printf("%-8p$ %07p$ %.8p$ %.*p$", ULONG_MAX, &s2, &s3, H, &s4));
+	printf("<- %i \n\n", printf("%-8p$ %07p$ %.8p$ %.*p$", ULONG_MAX, &s2, &s3, H, &s4));
 	ft_printf("\033[0m");
 
 	ft_printf("\033[1;31m");
@@ -188,7 +200,7 @@ int	main(void)
 	ft_printf(" ' flags and \\  :\n");
 	printf(" \%% \n");
 	ft_printf(" \%% \n");
-	ft_printf("hello \n world\n\n");
+	ft_printf("hello \n world\n\n"); 
 
 	ft_printf("\033[1;33m");
 	ft_printf("Edge case checks: negative precision, negative width w/e \n");
@@ -232,9 +244,43 @@ int	main(void)
 
 	ft_printf("\033[0;31m");
 	ft_printf("Null pointers :\n");
-	ft_printf("<- %i \n", ft_printf("%p, %9.2p, %2.9p, %.5p", LONG_MAX + 1, 1234, 1234, 0));
-	printf("<- %i \n\n", printf("%p, %9.2p, %2.9p, %.5p", LONG_MAX + 1, 1234, 1234, 0));
+	ft_printf("<- %i \n", ft_printf("%p, %9.2p, %2.9p, %.5p", NULL, 1234, 1234, 0));
+	printf("<- %i \n\n", printf("%p, %9.2p, %2.9p, %.5p", NULL, 1234, 1234, 0));
 
+	ft_printf("\033[1;31m");
+	ft_printf("Floats: f, 07.2f, .0f\n");
+	ft_printf("<- %i \n", ft_printf("%.7f, %07.2f, %.0f", f1, f1, f1));
+	printf("<- %i \n\n", printf("%.7f, %07.2f, %.0f", f1, f1, f1));
+	ft_printf("<- %i \n", ft_printf("%f, %07.2f, %.f", d1, d1, d1));
+	printf("<- %i \n\n", printf("%f, %07.2f, %.f", d1, d1, d1));
+	ft_printf("\033[0;32m");
+	ft_printf("Hexadecimal floats: a, 07.2a, .0a\n"); 
+	ft_printf("<- %i \n", ft_printf("%#a, %-13.2a, %.0a", f1, f1, f1));
+	printf("<- %i \n\n", printf("%#a, %-13.2a, %.0a", f1, f1, f1));
+
+	ft_printf("\033[1;32m");
+	ft_printf("Scientific notation!:\n");
+	ft_printf("<- %d \n", ft_printf("%e, %14e, %.e, %.8e", f1, f1, f1, f3));
+	printf("<- %d \n\n", printf("%e, %14e, %.e, %.8e", f1, f1, f1, f3));
+
+	ft_printf("\033[1;32m");
+	ft_printf("G conversion:\n");
+	ft_printf("<- %d \n", ft_printf("%g, %g, %g", f1, f2, f1)); 
+	printf("<- %d \n\n", printf("%g, %g, %g", f1, f2, f1));
+	ft_printf("\033[0;33m");
+	ft_printf("<- %d \n", ft_printf("%g, %g, %g", f4, f5, f6)); 
+	printf("<- %d \n\n", printf("%g, %g, %g", f4, f5, f6));
+
+	ft_printf("\033[1;33m");
+	ft_printf("Apostrophe flag:\n");
+	setlocale(LC_ALL, "en_US");
+	ft_printf("<- %i \n", ft_printf("%'i, %8'd, %'p, %'x", 12757, 965787, &nlptr, 286331153));
+	printf("<- %i \n\n", printf("%'i, %8'd, %'p, %'x", 12757, 965787, &nlptr, 286331153));
+
+	ft_printf("\033[0;34m");
+	ft_printf("Floating point exceptions:\n");
+	ft_printf("<- %i \n", ft_printf("%f, %f, %f", -NAN, -INFINITY, +INFINITY));
+	printf("<- %i \n\n", printf("%f, %f, %f", -NAN, -INFINITY, +INFINITY));
 
 	ft_printf("\033[1;31m");
 	ft_printf("R ");
@@ -252,6 +298,7 @@ int	main(void)
 	ft_printf("W ");
 	ft_printf("\033[1;32m");
 	ft_printf("!\n");
+	while (1) {}
 
 	return 0;
 }
