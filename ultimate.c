@@ -1,4 +1,4 @@
-#include "ft_printf.h"
+#include "../printf.h"
 #include <limits.h>
 #include <locale.h>
 #include <math.h>
