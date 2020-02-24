@@ -2,6 +2,7 @@
 #include <limits.h>
 #include <locale.h>
 #include <math.h>
+#include <stdio.h>
 
 int	main(void)
 {
@@ -53,6 +54,9 @@ int	main(void)
 	double		d1 = 392.65;
 	double		d2 = 413.6587;
 	double		d3 = 81201727.2;
+
+	int			n1 = 42;
+	int			n2 = 42;
 
 	ft_printf("\033[0;31m");
 	ft_printf("Strings: -Flag, 0Flag, .Flag, *Flag:\n");
@@ -175,10 +179,10 @@ int	main(void)
 
 	ft_printf("\033[0;31m");
 	ft_printf("Testing the n flag\n");
-	ft_printf("%s - 123456789%n\n", "voorbeeldstring1", &x1);
-	ft_printf("%i\n", n2);
-	printf("%s - 123456789%n\n", "voorbeeldstring2", &x1);
-	printf("%i\n\n", n1);
+	ft_printf("%s - 123456789%n\n", "voorbeeldstring1", &n1);
+	ft_printf("%i\n", n1);
+	printf("%s - 123456789%n\n", "voorbeeldstring2", &n2);
+	printf("%i\n\n", n2);
 
 	ft_printf("\033[1;31m");
 	ft_printf("Starting with l and ll flags: LONG_MIN, LONG_MAX, UINT_MAX, ULONG_MAX \n\n");
