@@ -38,8 +38,6 @@ int	main(void)
 	unsigned	x4 = 128;
 	unsigned	X4 = 128;
 
-	char		n1;
-	char		n2;
 	char		*nstr1;
 	int			H = 7;
 	char		*str;
