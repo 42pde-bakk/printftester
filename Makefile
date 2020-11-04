@@ -6,7 +6,7 @@
 #    By: pde-bakk <marvin@codam.nl>                   +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/12/02 17:36:51 by pde-bakk      #+#    #+#                  #
-#    Updated: 2020/11/04 16:29:08 by peerdb        ########   odam.nl          #
+#    Updated: 2020/11/04 16:34:06 by peerdb        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,18 +30,16 @@ endif
 all: $(NAME)
 
 $(NAME):
-	@echo $(ECHO) "$(YELLOW)Compiling your libftprintf.a"
+	@echo $(ECHO) "$(YELLOW)Compiling your libftprintf.a $(RESET)"
 	@make re -C ../
-	@echo $(ECHO) "$(PINK)Compiling my regular.c with your libftprintf.a"
+	@echo $(ECHO) "$(PINK)Compiling my regular.c with your libftprintf.a $(RESET)"
 	@$(CC) $(FLGS) regular.c ../libftprintf.a -o $(NAME)
-	@echo $(ECHO) $(RESET)
 
 ultimate:
-	@echo $(ECHO) "$(YELLOW)Compiling your libftprintf.a"
+	@echo $(ECHO) "$(YELLOW)Compiling your libftprintf.a $(RESET)"
 	@make re -C ../
-	@echo $(ECHO) "$(RED)Compiling my ultimate.c with your libftprintf.a"
+	@echo $(ECHO) "$(RED)Compiling my ultimate.c with your libftprintf.a $(RESET)"
 	@$(CC) $(FLGS) ultimate.c ../libftprintf.a -o $(NAME)
-	@echo $(ECHO) "$(RESET)
 
 clean:
 	@/bin/rm -f *.o
